@@ -1,0 +1,320 @@
+/* tokens-instrument.css
+ *
+ * System B, the instrument register, as it shipped.
+ * Reference brand in this file: The Assembly, a fictional members events app.
+ *
+ * The instrument register exists because of one correction that repeats on
+ * every project: too much empty space, too much scrolling, most people are on
+ * a phone. A web app is not a shorter marketing page. It is a different object,
+ * and this file is the contract that keeps it one.
+ *
+ * Read with references/tokens-deep.md section 4 and references/mobile.md.
+ *
+ * House law: once this file exists, no component may contain a raw hex, rgb(),
+ * hsl(), oklch(), or a bare z-index. Enforce with scripts/token-gate.mjs.
+ */
+
+:root {
+
+  /* ------------------------------------------------------------------------
+   * 1. SURFACES
+   *
+   * White paper is allowed here, unlike the cinematic register, because a
+   * dense list of cards on a tinted ground turns muddy fast. The tint moves
+   * into the INK instead: a green tinted near black carries the brand through
+   * a screen that is mostly text.
+   *
+   * --paper-2 is the recessed band behind grouped content, --surface-2 the
+   * step below that. Two steps is enough. A third gets used once and then
+   * argued about forever.
+   * ---------------------------------------------------------------------- */
+  --paper:     #FFFFFF;
+  --paper-2:   #F3EEE3;
+  --surface-2: #E9E2D2;
+  --card:      #FFFFFF;
+
+  /* ------------------------------------------------------------------------
+   * 2. LINE RAMP, THREE STEPS
+   *
+   * An instrument is mostly borders. With one line token every division reads
+   * as equally important and the screen flattens into a grid of boxes. Three
+   * steps let a border say "these belong together", "these are separate
+   * things", and "this is the edge of a region".
+   *
+   * Each value is deliberately unequal to every surface value above. A border
+   * that equals an elevated surface makes that surface invisible, and the
+   * failure looks like a rendering bug rather than a token bug.
+   * ---------------------------------------------------------------------- */
+  --line:        #E2DCCB;   /* inside a card */
+  --line-mid:    #C9C2AE;   /* between cards */
+  --line-strong: #8E897A;   /* region edges, active outlines */
+
+  /* ------------------------------------------------------------------------
+   * 3. INK RAMP
+   *
+   * Three steps, all green tinted. --ink-3 is still tinted: a truly neutral
+   * grey for tertiary text is the moment a warm screen turns cold.
+   * ---------------------------------------------------------------------- */
+  --ink:   #141A18;   /* titles, primary text */
+  --ink-2: #4A5250;   /* secondary text, metadata */
+  --ink-3: #63625A;   /* tertiary, inactive tab labels */
+
+  /* ------------------------------------------------------------------------
+   * 4. THE ACTION COLOUR IS CALLED SIGNAL, NOT PRIMARY
+   *
+   * "Primary" invites a "secondary" and then a "tertiary", and within a month
+   * there are four button colours and no hierarchy. "Signal" has no plural.
+   * There is one signal on a screen and it is the thing to do next.
+   *
+   * --signal-wash is the tinted background behind a selected state.
+   * --signal-ink is the text colour that sits ON the signal.
+   * ---------------------------------------------------------------------- */
+  --signal:       #000000;
+  --signal-hover: #1E241F;
+  --signal-wash:  #E7F2EF;
+  --signal-ink:   #E1FECC;
+
+  /* ------------------------------------------------------------------------
+   * 5. STATE AS A TOKEN, NAMED FOR THE PRODUCT FACT
+   *
+   * These are not colours. They are product facts that happen to have a
+   * colour. Naming them --few and --full instead of --orange and --grey means
+   * the scarcity rule lives in exactly one place, and nobody can reach for
+   * "the orange" to decorate something that is not scarcity.
+   *
+   * The test: if you can rename the hex without renaming the token, the token
+   * is named correctly.
+   *
+   * Every one of these is a TEXT colour, so every one has to clear 4.5:1 on
+   * every surface it can land on, including the recessed --surface-2 band.
+   * --ok is a step darker than the wellness category green for exactly that
+   * reason: the category value is tuned for its own pale wash, this one has to
+   * survive the darkest surface in the system.
+   * ---------------------------------------------------------------------- */
+  --few:   #8F5500;   /* few places left */
+  --full:  #5B6360;   /* sold out */
+  --error: #A81E14;
+  --ok:    #0B6B55;
+
+  /* ------------------------------------------------------------------------
+   * 6. CATEGORY TRIADS
+   *
+   * One triad per category, and every category gets all three or none.
+   *   base   text and icons on paper
+   *   wash   the chip background
+   *   beacon the bright dot or highlight that has to survive on a photograph
+   *
+   * The beacon exists because a category colour tuned for text on white
+   * disappears the moment it lands on a dark image. Solve it once in the token
+   * layer instead of per component.
+   *
+   * Adding a category means adding three tokens. That friction is deliberate:
+   * it is what stops a taxonomy growing to nineteen categories.
+   * ---------------------------------------------------------------------- */
+  --cat-sailing:  #0E63A8;  --cat-sailing-wash:  #E7F0F8;  --cat-sailing-beacon:  #5AB0EE;
+  --cat-dining:   #B3341F;  --cat-dining-wash:   #F9EBE7;  --cat-dining-beacon:   #F4785C;
+  --cat-wellness: #0F7A62;  --cat-wellness-wash: #E6F2EE;  --cat-wellness-beacon: #3FC6A0;
+  --cat-sport:    #3C3F96;  --cat-sport-wash:    #EAEBF6;  --cat-sport-beacon:    #8B92F0;
+  --cat-art:      #6B3AA0;  --cat-art-wash:      #F1EAF7;  --cat-art-beacon:      #C089F0;
+
+  /* ------------------------------------------------------------------------
+   * 7. ELEVATION: RING PLUS SHADOW
+   *
+   * Three steps. --lift-1 is the resting card, --lift-2 a menu or sheet,
+   * --lift-3 the one thing the user is currently operating. In the shadow
+   * gallery pattern, depth does the sorting: the active tile is at --lift-3
+   * and its neighbours at --lift-1, with no other difference between them.
+   * ---------------------------------------------------------------------- */
+  --lift-1: 0 0 0 1px rgba(20, 26, 24, .08), 0 1px 2px rgba(20, 26, 24, .05);
+  --lift-2: 0 0 0 1px rgba(20, 26, 24, .05), 0 6px 16px rgba(20, 26, 24, .10);
+  --lift-3: 0 12px 32px rgba(20, 26, 24, .16);
+  --focus:  0 0 0 2px var(--signal), 0 0 0 4px var(--signal-wash);
+
+  /* ------------------------------------------------------------------------
+   * 8. RADIUS BY ROLE
+   * ---------------------------------------------------------------------- */
+  --r-control: 10px;
+  --r-media:   14px;
+  --r-sheet:   20px;
+  --r-commit:  999px;
+
+  /* ------------------------------------------------------------------------
+   * 9. NAMED Z LADDER
+   *
+   * The bar sits below the scrim so a sheet can cover it, and the header sits
+   * above the scrim so the close control is always reachable. Those two facts
+   * are the entire reason this ladder is ordered the way it is, and they are
+   * invisible unless the ladder is named.
+   * ---------------------------------------------------------------------- */
+  --z-bar:    45;
+  --z-scrim:  48;
+  --z-header: 50;
+  --z-menu:   52;
+  --z-viewer: 60;
+
+  /* ------------------------------------------------------------------------
+   * 10. SEMANTIC TYPE SCALE
+   *
+   * One sans, many sizes. Hierarchy comes from weight and size, never from a
+   * second typeface: a display serif in a booking flow reads as a marketing
+   * page that wandered into the product.
+   *
+   * The names are roles, not sizes, so a card title can be retuned once
+   * without a find and replace across forty files.
+   * ---------------------------------------------------------------------- */
+  --t-micro: .8125rem;   /* 13px, tab labels, chips */
+  --t-meta:  .875rem;    /* 14px, card metadata */
+  --t-body:  1rem;
+  --t-lede:  1.125rem;
+  --t-card:  1rem;       /* card title, same size as body, heavier weight */
+  --t-sec:   1.375rem;   /* section heading inside a screen */
+  --t-h1:    2rem;       /* screen title */
+  --t-hero:  min(4.9vw + 1.5rem, 4.25rem);   /* the one cinematic surface */
+
+  /* ------------------------------------------------------------------------
+   * 11. SPACING, 4px BASE
+   *
+   * In this register --s5 and --s6 do the work between blocks and --s7 is
+   * reserved for major regions. --s8 and above exist for the single cinematic
+   * surface only. Reaching for --s9 inside an app screen is the "too much
+   * negative space" defect arriving in token form.
+   * ---------------------------------------------------------------------- */
+  --s1: 4px;   --s2: 8px;   --s3: 12px;  --s4: 16px;  --s5: 24px;  --s6: 32px;
+  --s7: 48px;  --s8: 64px;  --s9: 96px;  --s10: 144px; --s11: 200px;
+
+  /* ------------------------------------------------------------------------
+   * 12. LAYOUT
+   * ---------------------------------------------------------------------- */
+  --pad:     clamp(20px, 4vw, 32px);
+  --shell:   1240px;
+  --measure: 62ch;
+  --band:    clamp(32px, 6vw, 96px);
+
+  /* ------------------------------------------------------------------------
+   * 13. APP CHROME. THIS IS WHAT MAKES IT FEEL NATIVE.
+   *
+   * Every scroll container, sticky element, sheet and safe area calculation
+   * references these. Without them, exactly one screen ends up with content
+   * hidden behind the bottom bar and nobody can work out which change did it.
+   *
+   * The rule that makes them work: a component may never hardcode 58px. If a
+   * number appears twice in the codebase it belongs here.
+   * ---------------------------------------------------------------------- */
+  --header-h:    52px;
+  --tabbar-h:    58px;
+  --actionbar-h: 68px;
+
+  /* ------------------------------------------------------------------------
+   * 14. TYPE ROLE AND MOTION
+   *
+   * One face carrying Thai and Latin removes an entire class of fallback
+   * problem: no mismatched x heights, no second @font-face block, no screen
+   * where the Thai line is visibly a different typeface from the English one
+   * beside it.
+   *
+   * Motion in this register is functional only. Nothing here narrates.
+   * ---------------------------------------------------------------------- */
+  --ui: 'LINE Seed Sans TH', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans Thai', sans-serif;
+
+  --ease:    cubic-bezier(.23, 1, .32, 1);
+  --t-fast:  .15s;   /* tap feedback */
+  --t-state: .25s;   /* selection, expansion */
+  --t-slow:  .45s;   /* sheet in, gallery settle */
+
+  --lh-tight: 1.2;
+  --lh-body:  1.5;
+  --lh-thai:  1.65;
+}
+
+:lang(th) { line-height: var(--lh-thai); letter-spacing: 0 }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---- primitives ---------------------------------------------------------- */
+
+* { margin: 0; padding: 0; box-sizing: border-box }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--ui);
+  font-size: var(--t-body);
+  line-height: var(--lh-body);
+  font-variant-numeric: tabular-nums;   /* counts, prices and times must align */
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  /* Stops a scroll inside a sheet chaining to the page behind it, and gives
+   * pull to refresh somewhere to rubber band against. */
+  overscroll-behavior-y: contain;
+}
+
+img, video { display: block; max-width: 100% }
+img { height: auto }
+a { color: inherit; text-decoration: none }
+a:focus-visible, button:focus-visible { outline: none; box-shadow: var(--focus) }
+
+/* Every scroll container must clear the tab bar, or the last row of the last
+ * list is permanently unreachable on exactly one device size. */
+main {
+  padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom) + var(--s5));
+}
+
+/* ---- the bottom tab bar -------------------------------------------------- */
+
+.tabbar {
+  position: fixed; inset: auto 0 0 0; z-index: var(--z-bar);
+  height: calc(var(--tabbar-h) + env(safe-area-inset-bottom));
+  padding-bottom: env(safe-area-inset-bottom);
+  display: grid; grid-auto-flow: column; grid-auto-columns: 1fr;
+  background: var(--paper); border-top: 1px solid var(--line);
+}
+.tabbar a {
+  display: grid; place-items: center; gap: 3px;
+  font-size: var(--t-micro); color: var(--ink-3);
+  min-height: 48px;                       /* legal touch target */
+  touch-action: manipulation;             /* kills the 300ms tap delay */
+  -webkit-tap-highlight-color: transparent;
+}
+/* Mark the current tab with aria-current, not a colour class, so the state is
+ * real for assistive technology and cannot drift out of sync with the style. */
+.tabbar a[aria-current="page"] { color: var(--ink); font-weight: 600 }
+
+/* The sticky commit bar, which may sit above the tab bar on a detail screen
+ * for the ONE action that screen commits. Never two action bars. */
+.commitbar {
+  position: fixed; z-index: var(--z-bar);
+  inset: auto 0 calc(var(--tabbar-h) + env(safe-area-inset-bottom)) 0;
+  height: var(--actionbar-h);
+  display: flex; align-items: center; gap: var(--s3);
+  padding: 0 var(--pad);
+  background: var(--paper); border-top: 1px solid var(--line);
+  box-shadow: var(--lift-2);
+}
+
+/* ---- the card that survives being seen fifty times ----------------------- */
+
+.card {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--r-media); padding: var(--s4);
+  box-shadow: var(--lift-1);
+}
+.card__chip {
+  display: inline-flex; align-items: center; gap: var(--s1);
+  font-size: var(--t-micro); border-radius: var(--r-commit);
+  padding: 2px var(--s2);
+}
+.card__avail { font-size: var(--t-micro); font-weight: 600 }
+.card__avail[data-state="few"]  { color: var(--few) }
+.card__avail[data-state="full"] { color: var(--full) }
+.card__title { font-size: var(--t-card); font-weight: 600; line-height: var(--lh-tight) }
+.card__meta  { font-size: var(--t-meta); color: var(--ink-2) }
+
+/* A 60ms scale to .97 on tap is the closest a web app gets to feeling native.
+ * It costs one rule and it is the cheapest delight in the whole system. */
+.card:active, .tabbar a:active { transform: scale(.97); transition: transform 60ms linear }

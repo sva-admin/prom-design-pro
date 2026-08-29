@@ -1,0 +1,9 @@
+{
+  "name": "prom-design-pro",
+  "version": "1.0.0",
+  "description": "Prom Design Pro: the working loop behind the house style. The brief and design contract, the localhost review gate, a six agent audit harness that verifies its own findings, both proven token systems at full depth, and the mobile web app playbook. Runs alongside the free prom-design skill.",
+  "author": { "name": "SV Academy", "url": "https://github.com/sva-admin" },
+  "license": "MIT",
+  "keywords": ["claude-code", "design", "skill", "design-system", "design-tokens", "audit", "mobile", "agent-skills"],
+  "homepage": "https://loop.sv-academy.org"
+}

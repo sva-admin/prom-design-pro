@@ -1,0 +1,16 @@
+{
+  "name": "prom-design-pro",
+  "metadata": { "description": "SV Academy Prom Design Pro: the working loop, the token systems, and the audit harness behind the house style." },
+  "owner": { "name": "SV Academy", "url": "https://github.com/sva-admin" },
+  "plugins": [
+    {
+      "name": "prom-design-pro",
+      "version": "1.0.0",
+      "description": "The operator's edition of the house design style: brief, design contract, build order, localhost review gate, a six agent audit harness with runnable gates, both token systems at full depth, and the mobile web app playbook. Fictional example brands throughout.",
+      "author": { "name": "SV Academy", "url": "https://github.com/sva-admin" },
+      "source": "./",
+      "category": "design",
+      "homepage": "https://loop.sv-academy.org"
+    }
+  ]
+}
