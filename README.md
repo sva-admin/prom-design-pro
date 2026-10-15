@@ -275,3 +275,5 @@ SV Academy teaches people to build real things with AI, free, at
 [github.com/sva-admin](https://github.com/sva-admin?tab=repositories).
 
 MIT licensed.
+
+SV Academy is the education brand of [Silicon Valley Innovation](https://svinnovation.com), a Bangkok software and AI company that can build this for your business.
